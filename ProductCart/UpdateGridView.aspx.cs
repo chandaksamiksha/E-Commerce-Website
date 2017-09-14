@@ -50,12 +50,12 @@ namespace ProductCart
             {
                 ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowSuccess", "javascript:alert('Record Updated Successfully');", true);
             }
-            Response.Redirect("~/Inventory.aspx");
+            Response.Redirect("~/Admin.aspx");
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Inventory.aspx");
+            Response.Redirect("~/Admin.aspx");
         }
     }
 }
