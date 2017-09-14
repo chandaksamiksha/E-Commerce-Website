@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
   <title>Online Shopping Website</title>
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="Style.css"/>
 </head>
 <body>
     <form id="form1" runat="server">

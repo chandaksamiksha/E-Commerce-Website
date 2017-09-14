@@ -44,7 +44,6 @@ namespace ProductCart
                 GridViewRow row = ProductGrid.Rows[index];
                 string id = row.Cells[0].Text;
                 
-                Session["i" + row.Cells[0].Text] = row.Cells[3].Text;
                 if(Session["totalPrice"]==null)
                 {
                     Session["totalPrice"] = Convert.ToInt32(row.Cells[3].Text);
@@ -59,43 +58,12 @@ namespace ProductCart
                 else cart=(CartItems)Session[_cartItems];
                 cart.AddItemToCart(id);
               }
-
-            if (e.CommandName == "EditProduct")
-            {
-                int index = Convert.ToInt32(e.CommandArgument);
-                GridViewRow row = ProductGrid.Rows[index];
-                Response.Redirect("~/UpdateGridView.aspx?P_Name=" + row.Cells[0].Text);
-            }
-
-
-            if (e.CommandName == "DeleteProduct")
-            {
-                int index = Convert.ToInt32((string)e.CommandArgument);
-                GridViewRow row = ProductGrid.Rows[index];
-                string id = row.Cells[0].Text;
-                if (idOfProduct.Contains(id))
-                {
-                    deleteLabel.Text = "*Cannot Delete Product It Is In the Cart";
-                }
-                else
-                {
-                    Response.Redirect("~/DeleteGridView.aspx?P_Name=" + row.Cells[0].Text);
-                }
-            }
         }
-
-
         protected void Checkout_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Cart.aspx");
         }
 
-        protected void Add_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/InsertGridView.aspx");
-        }
-
-    
     }
 }
 

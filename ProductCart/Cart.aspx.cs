@@ -61,16 +61,45 @@ namespace ProductCart
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            SqlConnection connection = new SqlConnection("Data Source=TAVDESKRENT013;Initial Catalog=Shop;User Id=sa;password=test123!@#");
-            connection.Open();
-            SqlCommand command = new SqlCommand($"insert into Orders values(Current_TimeStamp,'" + Convert.ToInt32(Session["totalPrice"]) + "')", connection);
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            DataSet ds = new DataSet();
-            adapter.Fill(ds);
-            Table1.Visible = false;
-            Label1.Text = "Order Status";
-            PayableAmt.Text = "Order Generated";
+            string orderId = null;
+            using (SqlConnection connection = new SqlConnection("Data Source=TAVDESKRENT013;Initial Catalog=Shop;User Id=sa;password=test123!@#"))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand($"insert into Orders OUTPUT inserted.O_ID values(Current_TimeStamp,'" + Convert.ToInt32(Session["totalPrice"]) + "')", connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                orderId = (ds.Tables[0].Rows[0][0]).ToString();
+                Table1.Visible = false;
+                Label1.Text = "Order Status";
+                PayableAmt.Text = "Order Generated";
+                Button1.Visible = false;
+            }
+            CartItems items = null;
+            items = (CartItems)(Session[_cartItems]);
+            foreach (var item in items.items )
+            {
+                using (SqlConnection connection = new SqlConnection("Data Source=TAVDESKRENT013;Initial Catalog=Shop;User Id=sa;password=test123!@#"))
+                {
+                    connection.Open();
+                    int p_Id = Convert.ToInt32(item);
+                    SqlCommand command = new SqlCommand($"insert into OrderDetails values ({orderId},{p_Id},{Convert.ToInt32(Session["totalPrice"])})",connection);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds);
+                    Table1.Visible = false;
+                    Label1.Text = "Inserted Into OrderDetails";
+                    PayableAmt.Text = "Order Generated";
+                }
+            }
         }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Inventory.aspx");
+        }
+
+        
     }
 }
 

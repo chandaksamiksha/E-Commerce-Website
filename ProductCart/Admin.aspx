@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
      <title>Online Shopping Website</title>
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="Style.css"/>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -29,11 +29,7 @@
                      <asp:BoundField DataField="P_Description" HeaderText="Description"/>
                      <asp:BoundField DataField="P_Price" HeaderText="Price"/>
                      <asp:BoundField DataField="P_Quantity" HeaderText="Quantity"/>
-                    <%--<asp:TemplateField HeaderText="Add">
-                        <ItemTemplate>
-                            <asp:Button ID="Button1" runat="server" Text="Add To Cart" CommandName="AddToCart" CommandArgument='<%# Container.DataItemIndex %>'/>
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
+                  
                     <asp:TemplateField HeaderText="Edit">
                         <ItemTemplate>
                             <asp:Button ID="Button7" runat="server" Text="Edit" CommandName="EditProduct" CommandArgument='<%# Container.DataItemIndex %>'/>
@@ -46,23 +42,12 @@
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-            <br />
+           <br />
             <br />
             <asp:Button ID="Button2" runat="server" Text="Add A  New Product" Width="195px" OnClick="Add_Click" />
-            &nbsp;&nbsp;&nbsp;
-            <br />
-            <br />
-            <br />
-            <%--<asp:Button ID="Checkout" runat="server" Text="Checkout" OnClick="Checkout_Click" />--%>
-            
-            <br />
-            <br />
-            <br />
-            
-            <br />
+         
             <asp:Label ID="deleteLabel" runat="server" ForeColor="Red"></asp:Label>
             <br />
-
         </div>
     </form>
 </body>
