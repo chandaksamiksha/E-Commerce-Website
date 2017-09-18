@@ -14,12 +14,12 @@ namespace ProductCart
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void CustomerButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("Inventory.aspx");
         }
 
-        protected void Button2_Click(object sender, EventArgs e)
+        protected void AdminButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("Admin.aspx");
         }

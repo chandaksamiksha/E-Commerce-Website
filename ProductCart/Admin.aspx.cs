@@ -12,6 +12,7 @@ namespace ProductCart
 {
     public partial class Admin : System.Web.UI.Page
     {
+        SqlConnection connection = new SqlConnection("Data Source=TAVDESKRENT013;Initial Catalog=Shop;User Id=sa;password=test123!@#");
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,15 +24,24 @@ namespace ProductCart
 
         protected void GridBinding()
         {
-            SqlConnection connection = new SqlConnection("Data Source=TAVDESKRENT013;Initial Catalog=Shop;User Id=sa;password=test123!@#");
-            SqlCommand command = new SqlCommand("select * from ProductItems", connection);
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            DataSet dataset = new DataSet();
-            adapter.Fill(dataset);
-            ProductGrid.DataSource = dataset.Tables[0];
-            ProductGrid.DataBind();
+            try
+            {
+                SqlCommand command = new SqlCommand("select * from ProductItems", connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataSet dataset = new DataSet();
+                adapter.Fill(dataset);
+                ProductGrid.DataSource = dataset.Tables[0];
+                ProductGrid.DataBind();
+            }
+            catch
+            {
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
-    
+
         protected void ExtractData(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName == "EditProduct")
@@ -46,16 +56,8 @@ namespace ProductCart
                 GridViewRow row = ProductGrid.Rows[index];
                 string id = row.Cells[0].Text;
                 Response.Redirect("~/DeleteGridView.aspx?P_Name=" + row.Cells[0].Text);
-                
+
             }
         }
     }
 }
-
-
-
-
-    
-            
-            
-  

@@ -14,7 +14,7 @@ namespace ProductCart
 
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void ContinueShopping_Click(object sender, EventArgs e)
         {
             Response.Redirect("Inventory.aspx");
         }
