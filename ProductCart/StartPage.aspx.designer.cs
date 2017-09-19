@@ -58,21 +58,21 @@ namespace ProductCart {
         protected global::System.Web.UI.WebControls.HyperLink AdminLink;
         
         /// <summary>
-        /// Customer_Button control.
+        /// btnCustomer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Customer_Button;
+        protected global::System.Web.UI.WebControls.Button btnCustomer;
         
         /// <summary>
-        /// Admin_Button control.
+        /// btnAdmin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Admin_Button;
+        protected global::System.Web.UI.WebControls.Button btnAdmin;
     }
 }

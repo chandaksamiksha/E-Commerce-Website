@@ -13,8 +13,9 @@ namespace ProductCart
     public partial class DeleteGridView : System.Web.UI.Page
     {
         string p_Name;
-        SqlConnection con = new SqlConnection("Data Source=TAVDESKRENT013;Initial Catalog=Shop;User Id=sa;password=test123!@#");
-
+        static string constr = ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
+        SqlConnection connection = new SqlConnection(constr);
+        Log log = new Log();
         protected void Page_Load(object sender, EventArgs e)
         {
             p_Name = Request.QueryString["P_Name"].ToString();
@@ -27,9 +28,9 @@ namespace ProductCart
         {
             try
             {
-                SqlCommand cmd = new SqlCommand("delete from ProductItems where P_ID=" + p_Name, con);
-                con.Open();
-                int result = cmd.ExecuteNonQuery();
+                SqlCommand command = new SqlCommand("delete from ProductItems where P_ID=" + p_Name, connection);
+                connection.Open();
+                int result = command.ExecuteNonQuery();
 
                 if (result == 1)
                 {
@@ -37,18 +38,26 @@ namespace ProductCart
                 }
                 Response.Redirect("~/Admin.aspx");
             }
-            catch
+            catch (Exception e1)
             {
+                log.Logger(e1.ToString());
             }
             finally
             {
-                con.Close();
+                connection.Close();
             }
         }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Admin.aspx");
+            try
+            {
+                Response.Redirect("~/Admin.aspx");
+            }
+            catch (Exception e1)
+            {
+                log.Logger(e1.ToString());
+           }
         }
     }
 }

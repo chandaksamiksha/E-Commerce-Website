@@ -24,7 +24,7 @@
                 </ul>
             </div>
         </div>
-        <asp:Button ID="ContinueShopping_Button" runat="server" OnClick="ContinueShopping_Click" Text="Continue Shopping" Width="151px" />
+        <asp:Button ID="btnContinueShopping" runat="server" OnClick="ContinueShopping_Click" Text="Continue Shopping" Width="151px" />
     </form>
 </body>
 </html>

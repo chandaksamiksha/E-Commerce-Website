@@ -58,12 +58,12 @@ namespace ProductCart {
         protected global::System.Web.UI.WebControls.HyperLink AdminLink;
         
         /// <summary>
-        /// ContinueShopping_Button control.
+        /// btnContinueShopping control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ContinueShopping_Button;
+        protected global::System.Web.UI.WebControls.Button btnContinueShopping;
     }
 }

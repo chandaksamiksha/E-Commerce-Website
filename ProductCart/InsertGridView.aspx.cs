@@ -12,8 +12,9 @@ namespace ProductCart
 {
     public partial class InsertGridView : System.Web.UI.Page
     {
-        SqlConnection con = new SqlConnection("Data Source = TAVDESKRENT013; Initial Catalog = Shop; User Id = sa; password=test123!@#");
-
+        static string constr = ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
+        SqlConnection connection = new SqlConnection(constr);
+        Log log = new Log();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -23,36 +24,45 @@ namespace ProductCart
 
         protected void btnInsert_Click(object sender, EventArgs e)
         {
-            string p_Name = txtProductName.Text;
-            string p_Description = txtDescription.Text;
-            string p_Quantity = txtQuantity.Text;
-            Int16 p_SupplierId = Convert.ToInt16(txtSupplier.Text);
-            int p_Price = Convert.ToInt32(txtPrice.Text);
+            string pName = txtProductName.Text;
+            string pDescription = txtDescription.Text;
+            string pQuantity = txtQuantity.Text;
+            Int16 pSupplierId = Convert.ToInt16(txtSupplier.Text);
+            int pPrice = Convert.ToInt32(txtPrice.Text);
 
             try
             {
-                SqlCommand cmd = new SqlCommand("insert into ProductItems values('" + p_Name + "','" + p_Description + "','" + p_Quantity + "','" + p_SupplierId + "','" + p_Price + "')", con);
-                con.Open();
-                int result = cmd.ExecuteNonQuery();
-                
+                SqlCommand command = new SqlCommand("insert into ProductItems values('" + pName + "','" + pDescription + "','" + pQuantity + "','" + pSupplierId + "','" + pPrice + "')", connection);
+                connection.Open();
+                int result = command.ExecuteNonQuery();
+
                 if (result == 1)
                 {
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "ShowSuccess", "javascript:alert('Record Updated Successfully');", true);
                 }
                 Response.Redirect("~/Admin.aspx");
             }
-            catch
+            catch (Exception e1)
             {
-            }
+                log.Logger(e1.ToString());
+             }
             finally
             {
-                con.Close();
+                connection.Close();
             }
-            }
+        }
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/Admin.aspx");
+            try
+            {
+                Response.Redirect("~/Admin.aspx");
+            }
+            catch (Exception e1)
+            {
+                log.Logger(e1.ToString());
+            }
+
         }
     }
 }

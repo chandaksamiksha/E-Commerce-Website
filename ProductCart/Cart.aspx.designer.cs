@@ -58,48 +58,48 @@ namespace ProductCart {
         protected global::System.Web.UI.WebControls.HyperLink AdminLink;
         
         /// <summary>
-        /// Cart_Table control.
+        /// tableCart control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Cart_Table;
+        protected global::System.Web.UI.WebControls.Table tableCart;
         
         /// <summary>
-        /// TotalAmount_Label control.
+        /// lblTotalAmount control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TotalAmount_Label;
+        protected global::System.Web.UI.WebControls.Label lblTotalAmount;
         
         /// <summary>
-        /// PayableAmt_Label control.
+        /// lblPayableAmt control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label PayableAmt_Label;
+        protected global::System.Web.UI.WebControls.Label lblPayableAmt;
         
         /// <summary>
-        /// PlaceOrder_Button control.
+        /// btnPlaceOrder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button PlaceOrder_Button;
+        protected global::System.Web.UI.WebControls.Button btnPlaceOrder;
         
         /// <summary>
-        /// ContinueShopping_Button control.
+        /// btnContinueShopping control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ContinueShopping_Button;
+        protected global::System.Web.UI.WebControls.Button btnContinueShopping;
     }
 }

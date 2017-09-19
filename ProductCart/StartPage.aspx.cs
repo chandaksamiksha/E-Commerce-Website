@@ -9,6 +9,7 @@ namespace ProductCart
 {
     public partial class StartPage : System.Web.UI.Page
     {
+        Log log = new Log();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -16,12 +17,26 @@ namespace ProductCart
 
         protected void CustomerButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Inventory.aspx");
+            try
+            {
+                Response.Redirect("Inventory.aspx");
+            }
+            catch (Exception e1)
+            {
+                log.Logger(e1.ToString());
+            }
         }
 
         protected void AdminButton_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Admin.aspx");
+            try
+            {
+                Response.Redirect("Admin.aspx");
+            }
+            catch (Exception e1)
+            {
+                log.Logger(e1.ToString());
+            }
         }
     }
 }

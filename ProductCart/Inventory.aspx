@@ -31,7 +31,7 @@
                      <asp:BoundField DataField="P_Quantity" HeaderText="Quantity"/>
                     <asp:TemplateField HeaderText="Add">
                         <ItemTemplate>
-                            <asp:Button ID="AddToCart_Button" runat="server" Text="Add To Cart" CommandName="AddToCart" CommandArgument='<%# Container.DataItemIndex %>'/>
+                            <asp:Button ID="btnAddToCart" runat="server" Text="Add To Cart" CommandName="AddToCart" CommandArgument='<%# Container.DataItemIndex %>'/>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
@@ -41,7 +41,7 @@
             <br />
             <br />
             <br />
-            <asp:Button ID="Checkout_Button" runat="server" Text="Checkout" OnClick="Checkout_Click" />
+            <asp:Button ID="btnCheckout" runat="server" Text="Checkout" OnClick="Checkout_Click" />
             <br />
 
         </div>

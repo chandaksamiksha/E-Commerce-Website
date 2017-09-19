@@ -36,21 +36,21 @@
 
                     <asp:TemplateField HeaderText="Edit">
                         <ItemTemplate>
-                            <asp:Button ID="Edit_Button" runat="server" Text="Edit" CommandName="EditProduct" CommandArgument='<%# Container.DataItemIndex %>' />
+                            <asp:Button ID="btnEdit" runat="server" Text="Edit" CommandName="EditProduct" CommandArgument='<%# Container.DataItemIndex %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Delete">
                         <ItemTemplate>
-                            <asp:Button ID="Delete_Button" runat="server" Text="Delete" CommandName="DeleteProduct" CommandArgument='<%# Container.DataItemIndex %>' />
+                            <asp:Button ID="btnDelete" runat="server" Text="Delete" CommandName="DeleteProduct" CommandArgument='<%# Container.DataItemIndex %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>
             </asp:GridView>
             <br />
             <br />
-            <asp:Button ID="AddProduct_Button" runat="server" Text="Add A  New Product" Width="195px" OnClick="Add_Click" />
+            <asp:Button ID="btnAddProduct" runat="server" Text="Add A  New Product" Width="195px" OnClick="Add_Click" />
 
-            <asp:Label ID="Delete_Label" runat="server" ForeColor="Red"></asp:Label>
+            <asp:Label ID="lblDelete" runat="server" ForeColor="Red"></asp:Label>
             <br />
         </div>
     </form>

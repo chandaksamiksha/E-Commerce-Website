@@ -13,14 +13,15 @@ namespace ProductCart
     public partial class Cart : System.Web.UI.Page
     {
         private readonly string _cartItems = "CartItems";
-        SqlConnection connection = new SqlConnection("Data Source=TAVDESKRENT013;Initial Catalog=Shop;User Id=sa;password=test123!@#");
+        static string constr = ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
+        SqlConnection connection = new SqlConnection(constr);
+        Log log = new Log();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string id = Request.QueryString["pid"].ToString();
             CartItems items = null;
             if (Session[_cartItems] == null)
             {
-                TotalAmount_Label.Text = "Cart Is Empty";
+                lblTotalAmount.Text = "Cart Is Empty";
                 Response.Redirect("Inventory.aspx");
             }
             else
@@ -47,13 +48,14 @@ namespace ProductCart
                             cell.Text = dataset.Rows[0][i++].ToString();
                             row.Cells.Add(cell);
                         }
-                        Cart_Table.Rows.Add(row);
+                        tableCart.Rows.Add(row);
                     }
                     if (Session["totalPrice"] != null)
-                        PayableAmt_Label.Text = Session["totalPrice"].ToString();
+                        lblPayableAmt.Text = Session["totalPrice"].ToString();
                 }
-                catch
+                catch (Exception e1)
                 {
+                    log.Logger(e1.ToString());
                 }
                 finally
                 {
@@ -74,13 +76,14 @@ namespace ProductCart
                 DataSet ds = new DataSet();
                 adapter.Fill(ds);
                 orderId = (ds.Tables[0].Rows[0][0]).ToString();
-                Cart_Table.Visible = false;
-                TotalAmount_Label.Text = "Order Status";
-                PayableAmt_Label.Text = "Order Generated";
-                PlaceOrder_Button.Visible = false;
+                tableCart.Visible = false;
+                lblTotalAmount.Text = "Order Status";
+                lblPayableAmt.Text = "Order Generated";
+                btnPlaceOrder.Visible = false;
             }
-            catch
+            catch (Exception e1)
             {
+                log.Logger(e1.ToString());
             }
             finally
             {
@@ -98,12 +101,13 @@ namespace ProductCart
                     SqlDataAdapter adapter = new SqlDataAdapter(command);
                     DataSet ds = new DataSet();
                     adapter.Fill(ds);
-                    Cart_Table.Visible = false;
-                    TotalAmount_Label.Text = "Inserted Into OrderDetails";
-                    PayableAmt_Label.Text = "Order Generated";
+                    tableCart.Visible = false;
+                    lblTotalAmount.Text = "Inserted Into OrderDetails";
+                    lblPayableAmt.Text = "Order Generated";
                 }
-                catch
+                catch (Exception e1)
                 {
+                    log.Logger(e1.ToString());
                 }
                 finally
                 {
@@ -114,9 +118,14 @@ namespace ProductCart
 
         protected void ContinueShoppingClick(object sender, EventArgs e)
         {
-            Response.Redirect("Inventory.aspx");
+            try
+            {
+                Response.Redirect("Inventory.aspx");
+            }
+            catch (Exception e1)
+            {
+                log.Logger(e1.ToString());
+            }
         }
-
-
     }
 }

@@ -26,7 +26,7 @@
             <h1>Your Cart Contains</h1>
             <br />
             <br />
-            <asp:Table ID="Cart_Table" runat="server" GridLines="Both" Width="950px" BorderStyle="Groove">
+            <asp:Table ID="tableCart" runat="server" GridLines="Both" Width="950px" BorderStyle="Groove" Visible="true">
                 <asp:TableHeaderRow>
                     <asp:TableHeaderCell Text="Product Description">
                     </asp:TableHeaderCell>
@@ -41,14 +41,14 @@
         </div>
         <br />
         <br />
-        <asp:Label ID="TotalAmount_Label" runat="server" Text="Total Amount"></asp:Label>
+        <asp:Label ID="lblTotalAmount" runat="server" Text="Total Amount"></asp:Label>
         &nbsp;&nbsp;&nbsp;
-        <asp:Label ID="PayableAmt_Label" runat="server"></asp:Label>
+        <asp:Label ID="lblPayableAmt" runat="server"></asp:Label>
         <br />
         <br />
-        <asp:Button ID="PlaceOrder_Button" runat="server" OnClick="PlaceOrderClick" Text="Place Order" Width="114px" />
+        <asp:Button ID="btnPlaceOrder" runat="server" OnClick="PlaceOrderClick" Text="Place Order" Width="114px" />
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:Button ID="ContinueShopping_Button" runat="server" OnClick="ContinueShoppingClick" Text="Continue Shopping " Width="128px" />
+        <asp:Button ID="btnContinueShopping" runat="server" OnClick="ContinueShoppingClick" Text="Continue Shopping " Width="128px" />
     </form>
 </body>
 </html>
