@@ -4,19 +4,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Online Shopping Website</title>
-    <link rel="stylesheet" href="Style.css">
+    <link rel="stylesheet" href="Style.css"/>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="InventoryForm" runat="server">
         <div>
             <div id="wrapper">
-            <asp:Image ID="Image1" runat="server" Height="226px" ImageUrl="/images/shoppingCart.jpg" Width="100%" />
+            <asp:Image ID="CartImage" runat="server" Height="226px" ImageUrl="/images/shoppingCart.jpg" Width="100%" />
         </div>
         <div id="navigation">
             <ul id="nav">
-            <li><asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="StartPage.aspx">Home</asp:HyperLink></li>
-            <li><asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="Inventory.aspx">Customer</asp:HyperLink></li>
-            <li><asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="Admin.aspx">Administration</asp:HyperLink></li>
+            <li><asp:HyperLink ID="StartLink" runat="server" NavigateUrl="StartPage.aspx">Home</asp:HyperLink></li>
+            <li><asp:HyperLink ID="InventoryLink" runat="server" NavigateUrl="Inventory.aspx">Customer</asp:HyperLink></li>
+            <li><asp:HyperLink ID="AdminLink" runat="server" NavigateUrl="Admin.aspx">Administration</asp:HyperLink></li>
             </ul>
         </div>
            <h1> Product List</h1>
@@ -31,36 +31,17 @@
                      <asp:BoundField DataField="P_Quantity" HeaderText="Quantity"/>
                     <asp:TemplateField HeaderText="Add">
                         <ItemTemplate>
-                            <asp:Button ID="Button1" runat="server" Text="Add To Cart" CommandName="AddToCart" CommandArgument='<%# Container.DataItemIndex %>'/>
+                            <asp:Button ID="btnAddToCart" runat="server" Text="Add To Cart" CommandName="AddToCart" CommandArgument='<%# Container.DataItemIndex %>'/>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <%--<asp:TemplateField HeaderText="Edit">
-                        <ItemTemplate>
-                            <asp:Button ID="Button7" runat="server" Text="Edit" CommandName="EditProduct" CommandArgument='<%# Container.DataItemIndex %>'/>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Delete">
-                        <ItemTemplate>
-                            <asp:Button ID="Button4" runat="server" Text="Delete" CommandName="DeleteProduct" CommandArgument='<%# Container.DataItemIndex %>'/>
-                        </ItemTemplate>
-                    </asp:TemplateField>--%>
                 </Columns>
             </asp:GridView>
             <br />
             <br />
-            <%--<asp:Button ID="Button2" runat="server" Text="Add A  New Product" Width="195px" OnClick="Add_Click" />--%>
-            &nbsp;&nbsp;&nbsp;
             <br />
             <br />
             <br />
-            <asp:Button ID="Checkout" runat="server" Text="Checkout" OnClick="Checkout_Click" />
-            
-            <br />
-            <br />
-            <br />
-            
-            <br />
-            <asp:Label ID="deleteLabel" runat="server" ForeColor="Red"></asp:Label>
+            <asp:Button ID="btnCheckout" runat="server" Text="Checkout" OnClick="Checkout_Click" />
             <br />
 
         </div>

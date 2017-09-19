@@ -13,14 +13,15 @@ namespace ProductCart
     public partial class Cart : System.Web.UI.Page
     {
         private readonly string _cartItems = "CartItems";
-
+        static string constr = ConfigurationManager.ConnectionStrings["connect"].ConnectionString;
+        SqlConnection connection = new SqlConnection(constr);
+        Log log = new Log();
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string id = Request.QueryString["pid"].ToString();
             CartItems items = null;
             if (Session[_cartItems] == null)
             {
-                Label1.Text = "Cart Is Empty";
+                lblTotalAmount.Text = "Cart Is Empty";
                 Response.Redirect("Inventory.aspx");
             }
             else
@@ -34,7 +35,7 @@ namespace ProductCart
                     DataTable dataset = null;
                     foreach (var item in items.items)
                     {
-                        SqlConnection connection = new SqlConnection("Data Source=TAVDESKRENT013;Initial Catalog=Shop;User Id=sa;password=test123!@#");
+                        connection.Open();
                         SqlCommand command = new SqlCommand($"select P_Description, P_Quantity,P_Price from ProductItems where P_ID='{item}';", connection);
                         SqlDataAdapter adapter = new SqlDataAdapter(command);
                         dataset = new DataTable();
@@ -47,33 +48,84 @@ namespace ProductCart
                             cell.Text = dataset.Rows[0][i++].ToString();
                             row.Cells.Add(cell);
                         }
-                        Table1.Rows.Add(row);
+                        tableCart.Rows.Add(row);
                     }
                     if (Session["totalPrice"] != null)
-                        PayableAmt.Text = Session["totalPrice"].ToString();
+                        lblPayableAmt.Text = Session["totalPrice"].ToString();
                 }
-                catch
+                catch (Exception e1)
                 {
+                    log.Logger(e1.ToString());
+                }
+                finally
+                {
+                    connection.Close();
                 }
             }
         }
 
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void PlaceOrderClick(object sender, EventArgs e)
         {
-            SqlConnection connection = new SqlConnection("Data Source=TAVDESKRENT013;Initial Catalog=Shop;User Id=sa;password=test123!@#");
-            connection.Open();
-            SqlCommand command = new SqlCommand($"insert into Orders values(Current_TimeStamp,'" + Convert.ToInt32(Session["totalPrice"]) + "')", connection);
-            SqlDataAdapter adapter = new SqlDataAdapter(command);
-            DataSet ds = new DataSet();
-            adapter.Fill(ds);
-            Table1.Visible = false;
-            Label1.Text = "Order Status";
-            PayableAmt.Text = "Order Generated";
+            string orderId = null;
+            try
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand($"insert into Orders OUTPUT inserted.O_ID values(Current_TimeStamp,'" + Convert.ToInt32(Session["totalPrice"]) + "')", connection);
+                SqlDataAdapter adapter = new SqlDataAdapter(command);
+                DataSet ds = new DataSet();
+                adapter.Fill(ds);
+                orderId = (ds.Tables[0].Rows[0][0]).ToString();
+                tableCart.Visible = false;
+                lblTotalAmount.Text = "Order Status";
+                lblPayableAmt.Text = "Order Generated";
+                btnPlaceOrder.Visible = false;
+            }
+            catch (Exception e1)
+            {
+                log.Logger(e1.ToString());
+            }
+            finally
+            {
+                connection.Close();
+            }
+            CartItems items = null;
+            items = (CartItems)(Session[_cartItems]);
+            foreach (var item in items.items)
+            {
+                try
+                {
+                    connection.Open();
+                    int p_Id = Convert.ToInt32(item);
+                    SqlCommand command = new SqlCommand($"insert into OrderDetails values ({orderId},{p_Id},{Convert.ToInt32(Session["totalPrice"])})", connection);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds);
+                    tableCart.Visible = false;
+                    lblTotalAmount.Text = "Inserted Into OrderDetails";
+                    lblPayableAmt.Text = "Order Generated";
+                }
+                catch (Exception e1)
+                {
+                    log.Logger(e1.ToString());
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        protected void ContinueShoppingClick(object sender, EventArgs e)
+        {
+            try
+            {
+                Response.Redirect("Inventory.aspx");
+            }
+            catch (Exception e1)
+            {
+                log.Logger(e1.ToString());
+            }
         }
     }
 }
-
-
-
-

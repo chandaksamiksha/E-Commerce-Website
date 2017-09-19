@@ -10,16 +10,16 @@
 namespace ProductCart {
     
     
-    public partial class Admin {
+    public partial class Invoice {
         
         /// <summary>
-        /// StartPage control.
+        /// InvoiceForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm StartPage;
+        protected global::System.Web.UI.HtmlControls.HtmlForm InvoiceForm;
         
         /// <summary>
         /// CartImage control.
@@ -31,13 +31,13 @@ namespace ProductCart {
         protected global::System.Web.UI.WebControls.Image CartImage;
         
         /// <summary>
-        /// StartupLink control.
+        /// StartPageLink control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink StartupLink;
+        protected global::System.Web.UI.WebControls.HyperLink StartPageLink;
         
         /// <summary>
         /// InventoryLink control.
@@ -58,30 +58,12 @@ namespace ProductCart {
         protected global::System.Web.UI.WebControls.HyperLink AdminLink;
         
         /// <summary>
-        /// ProductGrid control.
+        /// btnContinueShopping control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ProductGrid;
-        
-        /// <summary>
-        /// btnAddProduct control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddProduct;
-        
-        /// <summary>
-        /// lblDelete control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDelete;
+        protected global::System.Web.UI.WebControls.Button btnContinueShopping;
     }
 }
